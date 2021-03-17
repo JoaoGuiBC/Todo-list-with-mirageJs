@@ -6,6 +6,7 @@ export const GlobalStyle = createGlobalStyle`
     --text: #d5d4e0;
 
     --dark-purple: #27203f;
+    --purple: #470081;
     --light-purple: #372f52;
 
     --light-gray: #8e8ca7;
@@ -29,11 +30,21 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     background: var(--background);
+    -webkit-font-smoothing: antialiased;
     color: var(--text);
   }
 
   body, input, button {
-    font: 400 16px "Montserrat", sans-serif;
+    font-family: "Montserrat", sans-serif;
     color: var(--text);
+  }
+
+  h1, h2, h3, h4, h5, h6, strong {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 600;
+  }
+
+  button {
+    cursor: pointer;
   }
 `;
