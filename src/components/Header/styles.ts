@@ -17,6 +17,7 @@ export const Content = styled.div`
 
   div {
     display: flex;
+    box-shadow: 0px 16px 60px 4px rgba(0, 0, 0, 0.2);
 
     button {
       background: var(--dark-purple);
