@@ -37,6 +37,14 @@ createServer({
       
       return { status: 'deleted' };
     });
+
+    this.put('/todos/:id', (schema, request) => {
+      const id = request.params.id;
+      const todo = schema.findBy('todo', {id});
+      todo.update({ completed: !todo.attrs.completed });
+
+      return { status: 'altered' };
+    })
   }
 });
 

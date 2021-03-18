@@ -24,6 +24,11 @@ export function Todolist({ todos, useGetTodos }: TodolistProps) {
     api.delete(`todos/${id}`);
     useGetTodos();
   }
+  
+  function handleChangeTodoCompletion(id: string) {
+    api.put(`todos/${id}`);
+    useGetTodos();
+  }
 
   return (
     <Container>
@@ -31,7 +36,7 @@ export function Todolist({ todos, useGetTodos }: TodolistProps) {
 
         {todos.map(todo => (
           <div key={todo.id}>
-            <button type="button">
+            <button type="button" onClick={() => handleChangeTodoCompletion(todo.id)}>
               {todo.completed ? <IoIosCheckmarkCircleOutline /> : <IoIosRadioButtonOff />}
             </button>
             <p>{todo.title}</p>
