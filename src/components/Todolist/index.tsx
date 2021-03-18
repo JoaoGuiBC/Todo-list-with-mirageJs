@@ -1,12 +1,19 @@
+import { useEffect } from 'react';
 import { 
   IoIosClose, 
   IoIosRadioButtonOff, 
   IoIosCheckmarkCircleOutline 
 } from 'react-icons/io';
 
+import { api } from '../../services/api';
+
 import { Container, Content, Footer } from "./styles";
 
 export function Todolist() {
+  useEffect(() => {
+    api.get('todos').then(response => console.log(response.data));
+  }, []);
+
   return (
     <Container>
       <Content>
