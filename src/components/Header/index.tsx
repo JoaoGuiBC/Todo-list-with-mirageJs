@@ -5,7 +5,11 @@ import { api } from '../../services/api';
 
 import { Container, Content } from "./styles";
 
-export function Header() {
+interface HeaderProps {
+  useGetTodos: () => void;
+}
+
+export function Header({ useGetTodos }: HeaderProps) {
   const [title, setTitle] = useState('');
 
   const handleSubmit = useCallback(async() => {
@@ -17,6 +21,8 @@ export function Header() {
       title,
       completed: false,
     });
+
+    useGetTodos();
   }, [title]);
 
   return (

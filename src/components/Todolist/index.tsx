@@ -1,46 +1,37 @@
-import { useEffect } from 'react';
 import { 
   IoIosClose, 
   IoIosRadioButtonOff, 
   IoIosCheckmarkCircleOutline 
 } from 'react-icons/io';
 
-import { api } from '../../services/api';
-
 import { Container, Content, Footer } from "./styles";
 
-export function Todolist() {
-  // useEffect(() => {
-  //   api.get('todos').then(response => console.log(response.data));
-  // }, []);
+interface TodoProps {
+  title: string,
+  completed: boolean,
+  id: string,
+}
 
-  function name() {
-    api.get('todos').then(response => console.log(response.data));
-  }
+interface TodolistProps {
+  todos: TodoProps[],
+}
 
+export function Todolist({ todos }: TodolistProps) {
   return (
     <Container>
       <Content>
 
-        <div>
-          <button type="button" onClick={() => name()}>
-            <IoIosRadioButtonOff />
-          </button>
-          <p>Todo de teste</p>
-          <button type="button">
-            <IoIosClose />
-          </button>
-        </div>
-        
-        <div>
-          <button type="button">
-            <IoIosCheckmarkCircleOutline />
-          </button>
-          <p>Todo de teste</p>
-          <button type="button">
-            <IoIosClose />
-          </button>
-        </div>
+        {todos.map(todo => (
+          <div key={todo.id}>
+            <button type="button">
+              {todo.completed ? <IoIosCheckmarkCircleOutline /> : <IoIosRadioButtonOff />}
+            </button>
+            <p>{todo.title}</p>
+            <button type="button">
+              <IoIosClose />
+            </button>
+          </div>
+        ))}
 
         <Footer>
           <button type="button">Concluidas</button>
