@@ -29,6 +29,14 @@ createServer({
 
       return schema.create('todo', todo);
     });
+
+    this.delete('/todos/:id', (schema, request) => {
+      const id = request.params.id;
+
+      schema.findBy('todo', {id}).destroy();
+      
+      return { status: 'deleted' };
+    });
   }
 });
 
@@ -44,7 +52,7 @@ export default function Home() {
   return (
     <>
       <Header useGetTodos={handleGetTodos} />
-      <Todolist todos={todos} />
+      <Todolist todos={todos} useGetTodos={handleGetTodos} />
     </>
   )
 }

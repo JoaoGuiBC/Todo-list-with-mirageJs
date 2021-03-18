@@ -6,6 +6,8 @@ import {
 
 import { Container, Content, Footer } from "./styles";
 
+import { api } from '../../services/api';
+
 interface TodoProps {
   title: string,
   completed: boolean,
@@ -14,9 +16,15 @@ interface TodoProps {
 
 interface TodolistProps {
   todos: TodoProps[],
+  useGetTodos: () => void;
 }
 
-export function Todolist({ todos }: TodolistProps) {
+export function Todolist({ todos, useGetTodos }: TodolistProps) {
+  function handleDeleteTodo(id: string) {
+    api.delete(`todos/${id}`);
+    useGetTodos();
+  }
+
   return (
     <Container>
       <Content>
@@ -27,7 +35,7 @@ export function Todolist({ todos }: TodolistProps) {
               {todo.completed ? <IoIosCheckmarkCircleOutline /> : <IoIosRadioButtonOff />}
             </button>
             <p>{todo.title}</p>
-            <button type="button">
+            <button type="button" onClick={() => handleDeleteTodo(todo.id)}>
               <IoIosClose />
             </button>
           </div>
