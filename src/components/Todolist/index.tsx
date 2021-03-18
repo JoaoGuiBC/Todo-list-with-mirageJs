@@ -10,16 +10,20 @@ import { api } from '../../services/api';
 import { Container, Content, Footer } from "./styles";
 
 export function Todolist() {
-  useEffect(() => {
+  // useEffect(() => {
+  //   api.get('todos').then(response => console.log(response.data));
+  // }, []);
+
+  function name() {
     api.get('todos').then(response => console.log(response.data));
-  }, []);
+  }
 
   return (
     <Container>
       <Content>
 
         <div>
-          <button type="button">
+          <button type="button" onClick={() => name()}>
             <IoIosRadioButtonOff />
           </button>
           <p>Todo de teste</p>
