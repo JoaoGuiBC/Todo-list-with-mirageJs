@@ -18,10 +18,10 @@ export const Content = styled.div`
   div {
     display: flex;
     box-shadow: 0px 16px 60px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
 
     button {
       background: var(--dark-purple);
-      color: var(--text);
       font-size: 2rem;
       line-height: 0;
       

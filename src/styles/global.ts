@@ -10,6 +10,7 @@ export const GlobalStyle = createGlobalStyle`
     --light-purple: #372f52;
 
     --light-gray: #8e8ca7;
+    --blue: #4772ff;
   }
 
   * {
