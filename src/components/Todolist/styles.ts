@@ -74,21 +74,24 @@ export const Footer = styled.footer`
 
   justify-content: center;
   padding: 0.5rem 0;
+`;
 
-  button {
-    background: transparent;
-    border: none;
-    margin: 0 0.75rem;
-    font-size: .85rem;
-    transition: filter 0.2s;
+interface ButtonProps {
+  isSelected: boolean;
+}
 
-    &:hover:enabled {
-      filter: brightness(2);
-    }
+export const Button = styled.button<ButtonProps>`
+  background: transparent;
+  border: none;
+  margin: 0 0.75rem;
+  font-size: .85rem;
 
-    &:disabled {
-      color: var(--blue);
-      cursor: default;
-    }
+  color: ${(props) => props.isSelected ? 'var(--blue)' : 'var(--text)'};
+  cursor: ${(props) => props.isSelected ? 'default' : 'pointer'};
+
+  transition: filter 0.2s;
+
+  &:hover:enabled {
+    filter: ${(props) => props.isSelected ? '' : 'brightness(2)'};
   }
 `;

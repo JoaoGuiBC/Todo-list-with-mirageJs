@@ -1,3 +1,4 @@
+import { useCallback, useState } from 'react';
 import { 
   IoIosClose, 
   IoIosRadioButtonOff, 
@@ -6,7 +7,7 @@ import {
 
 import { useTodos } from '../../hooks/useTodos';
 
-import { Container, Content, Footer } from "./styles";
+import { Container, Content, Footer, Button } from "./styles";
 
 export function Todolist() {
   const { 
@@ -17,6 +18,23 @@ export function Todolist() {
     listAllTodos,
     listIncompletedTodos,
   } = useTodos();
+
+  const [selectedFilterButton, setSelectedFilterButton] = useState('all');
+
+  const handleFilterCompleteTodos = useCallback(() => {
+    setSelectedFilterButton('complete');
+    listCompletedTodos();
+  }, []);
+
+  const handleFilterAllTodos = useCallback(() => {
+    setSelectedFilterButton('all');
+    listAllTodos();
+  }, []);
+
+  const handleFilterIncompleteTodos = useCallback(() => {
+    setSelectedFilterButton('incomplete');
+    listIncompletedTodos();
+  }, []);
 
   return (
     <Container>
@@ -35,26 +53,29 @@ export function Todolist() {
         ))}
 
         <Footer>
-          <button 
+          <Button 
             type="button" 
-            onClick={() => listCompletedTodos()}
+            onClick={handleFilterCompleteTodos}
+            isSelected={selectedFilterButton === 'complete'}
           >
             Concluidas
-          </button>
+          </Button>
 
-          <button 
+          <Button 
             type="button" 
-            onClick={() => listAllTodos()}
+            onClick={handleFilterAllTodos}
+            isSelected={selectedFilterButton === 'all'}
           >
             Todas
-          </button>
+          </Button>
 
-          <button 
+          <Button 
             type="button" 
-            onClick={() => listIncompletedTodos()}
+            onClick={handleFilterIncompleteTodos}
+            isSelected={selectedFilterButton === 'incomplete'}
           >
             Não concluidas
-          </button>
+          </Button>
         </Footer>
 
       </Content>
