@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 
 import { api } from "../services/api";
 
@@ -26,4 +26,10 @@ export function TodoProvider({ children }:TodoProviderProps) {
       {children}
     </TodoContext.Provider>
   );
+}
+
+export function useTodos() {
+  const context = useContext(TodoContext);
+
+  return context;
 }
