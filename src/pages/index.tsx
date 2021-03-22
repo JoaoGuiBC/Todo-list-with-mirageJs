@@ -17,6 +17,23 @@ createServer({
     todo: Model,
   },
 
+  seeds(server) {
+    server.db.loadData({
+      todos: [
+        {
+          id: 1,
+          title: 'Terminar o app',
+          completed: false,
+        },
+        {
+          id: 2,
+          title: 'Terminar as seeds',
+          completed: true,
+        },
+      ],
+    });
+  },
+
   routes() {
     this.namespace = 'api';
 
