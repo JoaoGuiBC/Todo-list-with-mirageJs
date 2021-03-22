@@ -66,18 +66,10 @@ createServer({
 });
 
 export default function Home() {
-  const [todos, setTodos] = useState<TodoProps[]>([]);
-
-  const handleGetTodos = () => {
-    api.get('todos').then(response => setTodos(response.data.todos));
-  };
-
-  useEffect(handleGetTodos, []);
-
   return (
     <>
-      <Header useGetTodos={handleGetTodos} />
-      <Todolist todos={todos} useGetTodos={handleGetTodos} />
+      <Header/>
+      <Todolist/>
     </>
   )
 }

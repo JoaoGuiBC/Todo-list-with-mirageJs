@@ -1,15 +1,13 @@
 import { useCallback, useState } from 'react';
 import { IoIosAdd } from 'react-icons/io';
 
-import { api } from '../../services/api';
+import { useTodos } from '../../hooks/useTodos';
 
 import { Container, Content } from "./styles";
 
-interface HeaderProps {
-  useGetTodos: () => void;
-}
+export function Header() {
+  const { createTodo } = useTodos();
 
-export function Header({ useGetTodos }: HeaderProps) {
   const [title, setTitle] = useState('');
 
   const handleSubmit = useCallback(async() => {
@@ -17,13 +15,9 @@ export function Header({ useGetTodos }: HeaderProps) {
       return;
     };
 
-    await api.post('todos', {
-      title,
-      completed: false,
-    });
-
-    useGetTodos();
-  }, [title]);
+    await createTodo(title);
+    setTitle('');
+  }, [title, createTodo, setTitle]);
 
   return (
     <Container>
