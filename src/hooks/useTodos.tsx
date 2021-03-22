@@ -13,6 +13,9 @@ interface TodosContextData {
   createTodo: (todoTitle: string) => Promise<void>;
   deleteTodo: (todoId: number) => Promise<void>;
   updateTodo: (todoId: number) => Promise<void>;
+  listCompletedTodos: () => Promise<void>;
+  listIncompletedTodos: () => Promise<void>;
+  listAllTodos: () => Promise<void>;
 }
 
 interface TodoProviderProps {
@@ -45,7 +48,7 @@ export function TodoProvider({ children }:TodoProviderProps) {
   }
   
   async function updateTodo(todoId: number) {
-    const response = await api.put(`/todos/${todoId}`);
+    await api.put(`/todos/${todoId}`);
 
     setTodos(todos.map(todo => {
       if (todo.id === todoId) {
@@ -58,8 +61,38 @@ export function TodoProvider({ children }:TodoProviderProps) {
     }));
   }
 
+  async function listCompletedTodos() {
+    const response = await api.get('todos');
+
+    const responseTodos = response.data.todos as Todo[];
+
+    setTodos(responseTodos.filter(todo => todo.completed === true));
+  }
+
+  async function listIncompletedTodos() {
+    const response = await api.get('todos');
+
+    const responseTodos = response.data.todos as Todo[];
+
+    setTodos(responseTodos.filter(todo => todo.completed === false));
+  }
+
+  async function listAllTodos() {
+    const response = await api.get('todos');
+
+    setTodos(response.data.todos);
+  }
+
   return (
-    <TodoContext.Provider value={{todos, createTodo, deleteTodo, updateTodo}}>
+    <TodoContext.Provider value={{
+      todos, 
+      createTodo, 
+      deleteTodo, 
+      updateTodo,
+      listCompletedTodos,
+      listIncompletedTodos,
+      listAllTodos,
+    }}>
       {children}
     </TodoContext.Provider>
   );

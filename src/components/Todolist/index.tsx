@@ -9,7 +9,14 @@ import { useTodos } from '../../hooks/useTodos';
 import { Container, Content, Footer } from "./styles";
 
 export function Todolist() {
-  const { todos, deleteTodo, updateTodo } = useTodos();
+  const { 
+    todos, 
+    deleteTodo, 
+    updateTodo, 
+    listCompletedTodos,
+    listAllTodos,
+    listIncompletedTodos,
+  } = useTodos();
 
   return (
     <Container>
@@ -28,9 +35,26 @@ export function Todolist() {
         ))}
 
         <Footer>
-          <button type="button">Concluidas</button>
-          <button type="button" disabled>Todas</button>
-          <button type="button">Não concluidas</button>
+          <button 
+            type="button" 
+            onClick={() => listCompletedTodos()}
+          >
+            Concluidas
+          </button>
+
+          <button 
+            type="button" 
+            onClick={() => listAllTodos()}
+          >
+            Todas
+          </button>
+
+          <button 
+            type="button" 
+            onClick={() => listIncompletedTodos()}
+          >
+            Não concluidas
+          </button>
         </Footer>
 
       </Content>
